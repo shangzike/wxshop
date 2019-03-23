@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>潮购记录</title>
-    <meta content="app-id=984819816" name="apple-itunes-app" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0" />
-    <meta content="yes" name="apple-mobile-web-app-capable" />
-    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
-    <meta content="telephone=no" name="format-detection" />
-    <link href="css/comm.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/buyrecord.css">
-   
-    
-</head>
-<body>
+@extends('master')
+@section('title')
+    乐美
+@endsection
+@section('content')
     
 <!--触屏版内页头部-->
 <div class="m-block-header" id="div-header">
@@ -165,10 +154,8 @@
 </div>
 
 
-<script src="js/jquery-1.11.2.min.js"></script>
+@endsection
 
+@section('my-js')
 
-
-
-</body>
-</html>
+@endsection

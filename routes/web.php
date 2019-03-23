@@ -57,6 +57,12 @@ Route::prefix('address')->group(function () {
 
 //结算
 Route::any('order', 'Order\patmentController@patment');
+Route::any('order/pat/{id}', 'Order\patmentController@pay');
+
+//潮购记录
+Route::any('buyrecord', 'User\buyrecordController@buyrecord');
+//我的钱包
+Route::any('mywallet', 'User\mywalletController@mywallet');
 
 
 

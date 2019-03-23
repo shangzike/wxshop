@@ -103,7 +103,7 @@
                 '{{url('order')}}',
                 {cart_id:cart_id,_token:_token},
                 function (res) {
-                    console.log(res)
+                    location.href="{{url('order/pat')}}"+'/'+res;
                 }
             )
             //console.log(cart_id)

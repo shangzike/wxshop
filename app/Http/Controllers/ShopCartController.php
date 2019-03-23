@@ -23,7 +23,7 @@ class ShopCartController extends Controller
     public function add(Request $request)
     {
         $goods_id=$request->goods_id;
-        var_dump($goods_id);die;
+//        var_dump($goods_id);die;
         $user_id=session('user_id');
         $where=[
             'user_id'=>$user_id,

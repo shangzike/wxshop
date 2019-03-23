@@ -84,7 +84,7 @@
           $.actions(groups);
     });
 </script>
-<script src="js/jquery-1.8.3.min.js"></script>
+<script src="{{url('js/jquery-1.8.3.min.js')}}"></script>
 <script>
     var $$=jQuery.noConflict();
     $$(document).ready(function(){

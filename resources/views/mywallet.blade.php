@@ -1,19 +1,11 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>我的钱包</title>
-    <meta content="app-id=984819816" name="apple-itunes-app" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0" />
-    <meta content="yes" name="apple-mobile-web-app-capable" />
-    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
-    <meta content="telephone=no" name="format-detection" />
-    <link href="css/comm.css" rel="stylesheet" type="text/css" />
-    <link href="css/mywallet.css" rel="stylesheet" type="text/css" />
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-</head>
-<body>
-    
+﻿@extends('master')
+@section('title')
+	乐美
+
+@endsection
+<link href="{{url('css/mywallet.css')}}" rel="stylesheet" type="text/css" />
+@section('content')
+
 <!--触屏版内页头部-->
 <div class="m-block-header" id="div-header">
     <strong id="m-title">我的钱包</strong>
@@ -54,5 +46,7 @@
         	
         </div>
     </div>
-</body>
-</html>
+@endsection
+
+@section('my-js')
+@endsection

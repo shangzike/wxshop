@@ -12,25 +12,28 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="{{url('layui/css/layui.css')}}">
-    <link rel="stylesheet" href="{{url('layui/css/layui.css')}}">
     <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('css/index.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('css/member.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('css/cartlist.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{url('css/address.css')}}">
+    <link rel="stylesheet" href="{{url('css/buyrecord.css')}}">
 
 </head>
 <body fnav="1" class="g-acc-bg">
 @yield('content')
 </body>
 </html>
+<script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
 <script src="{{url('js/zepto.js')}}" charset="utf-8"></script>
 <script src="{{url('js/sm.js')}}"></script>
 <script src="{{url('js/sm-extend.js')}}"></script>
 <script src="{{url('js/jquery-1.8.3.min.js')}}"></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/flexslider/2.6.2/jquery.flexslider.min.js"></script>
 <script src="{{url('layui/layui.js')}}"></script>
 <script src="{{url('js/all.js')}}"></script>
 <script src="{{url('js/index.js')}}"></script>
 <script src="{{url('js/lazyload.min.js')}}"></script>
+
 @yield('my-js')
