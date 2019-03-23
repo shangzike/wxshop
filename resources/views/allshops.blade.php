@@ -79,9 +79,9 @@
             <div class="good-list-wrapper">
                 <div class="good-menu thin-bor-bottom">
                     <ul class="good-menu-list" id="ulOrderBy">
-                        <li orderflag="50" _type="update_time" class="current"><a href="javascript:;">最新 <span>↑</span></a></li>
-                        <li orderflag="20" _type="goods_num"><a href="javascript:;">库存 <span>↑</span></a></li>
-                        <li orderflag="30" _type="self_price"><a href="javascript:;">价格 <span>↑</span></a></li>
+                        <li orderflag="50" _type="update_time" class="default current"><a href="javascript:;">最新 <span>↑</span></a></li>
+                        <li orderflag="20" _type="goods_num" class="default"><a href="javascript:;">库存 <span>↑</span></a></li>
+                        <li orderflag="30" _type="self_price" class="default"><a href="javascript:;">价格 <span>↑</span></a></li>
                         <!--价值(由高到低30,由低到高31)-->
                     </ul>
                 </div>
@@ -111,7 +111,7 @@
                                                             <li class="P-bar03"><em>{{$v->goods_num}}</em>剩余</li>
                                                         </ul>
                                                     </div>
-                                                    <a codeid="12785750" class="cartadd" goods_id="{{$v->goods_id}}" canbuy="646" src=""><s></s></a>
+                                                    <p class="cartadd"><a codeid="12785750"  goods_id="{{$v->goods_id}}" canbuy="646" src=""><s></s></a></p>
                                                 </div>
                                             </div>
                                         </li>
@@ -150,6 +150,29 @@
         });
             
         $(function () {
+            $(document).on('click','.default',function () {
+                var _this=$(this);
+                var _type=$(this).attr('_type');
+                var asc=$(this).find('span').text();
+                var _token=$("#_token").val();
+                var cate_id=$("#sortListUl li[class='cateId current']").attr('cate_id');
+                _this.addClass("current");
+                _this.siblings("li").removeClass('current');
+                if(asc=='↑'){
+                    _this.find('span').text('↓')
+                }else{
+                    _this.find('span').text('↑')
+                }
+                var asc=$(this).find('span').text();
+                $.post(
+                    '{{url('default')}}',
+                    {_token:_token,asc:asc,_type:_type,cate_id:cate_id},
+                    function (res) {
+                        $('#good_data').html(res);
+                    }
+                )
+            })
+            //加入购物车
             $(document).on('click',".cartadd",function () {
                 var goods_id=$(this).attr('goods_id');
                 var _token=$("#_token").val();

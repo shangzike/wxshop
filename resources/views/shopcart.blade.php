@@ -34,15 +34,15 @@
                 <ul id="cartBody">
                     @foreach($res as $v)
                     <li>
-                        <s class="xuan current" ></s>
+                        <s class="xuan current"></s>
                         <a class="fl u-Cart-img" href="#，">
                             <img src="{{$v->goods_img}}" border="0" alt="">
                         </a>
-                        <div class="u-Cart-r" cart_id="{{$v->cart_id}}">
+                        <div class="u-Cart-r" cart_id="{{$v->cart_id}}" goods_id="{{$v->goods_id}}">
                             <a href="{{url('shopcontent')}}/{{$v->goods_id}}" class="gray6">{{$v->goods_name}}</a>
                             <span class="gray9">
                             <em>剩余{{$v->goods_num}}件</em>
-                                <em class="self">单价<a id="self_price">{{$v->self_price}}</a>元</em>
+                                <em class="self">单价<a class="self_price" self_price="{{$v->self_price}}">{{$v->self_price}}</a>元</em>
                             </span>
                             <div class="num-opt">
                                 <em class="num-mius dis min"><i></i></em>
@@ -66,41 +66,11 @@
                 </dt>
                 <dd>
                     <a href="javascript:;" id="a_payment" class="orangeBtn w_account remove">删除</a>
-                    <a href="javascript:;" id="a_payment" class="orangeBtn w_account">去结算</a>
+                    <a href="javascript:;" id="a_payment" class="orangeBtn w_account order">去结算</a>
                 </dd>
             </dl>
         </div>
-        <div class="hot-recom">
-            <div class="title thin-bor-top gray6">
-                <span><b class="z-set"></b>人气推荐</span>
-                <em></em>
-            </div>
-            <div class="goods-wrap thin-bor-top">
-                <ul class="goods-list clearfix">
-                    <li>
-                        <a href="https://m.1yyg.com/v44/products/23458.do" class="g-pic">
-                            <img src="" width="136" height="136">
-                        </a>
-                        <p class="g-name">
-                            <a href="https://m.1yyg.com/v44/products/23458.do">(第<i>368671</i>潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                        </p>
-                        <ins class="gray9">价值:￥7130</ins>
-                        <div class="btn-wrap">
-                            <div class="Progress-bar">
-                                <p class="u-progress">
-                                    <span class="pgbar" style="width:1%;">
-                                        <span class="pging"></span>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="gRate" data-productid="23458">
-                                <a href="javascript:;"><s></s></a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
 
 <div class="footer clearfix">
     <ul>
@@ -116,6 +86,60 @@
 <!---商品加减算总数---->
     <script type="text/javascript">
     $(function () {
+        $('.order').click(function () {
+            var cart_id='';
+            $('.xuan').each(function () {
+                if($(this).attr('class')=='xuan current'){
+                    cart_id+=$(this).siblings("div[class='u-Cart-r']").attr('cart_id')+'.'
+                }
+            })
+            cart_id=cart_id.substr(0,cart_id.length-1);
+            var _token=$("#_token").val();
+            if(cart_id==''){
+                alert('请至少选择一个商品');
+                location.href="shopcart"
+            }
+            $.post(
+                '{{url('order')}}',
+                {cart_id:cart_id,_token:_token},
+                function (res) {
+                    console.log(res)
+                }
+            )
+            //console.log(cart_id)
+        })
+
+
+        //批量删除
+        $('.remove').click(function () {
+            var cart_id='';
+            $(".xuan").each(function () {
+                if($(this).attr('class')=='xuan current'){
+                    cart_id+=$(this).siblings("div[class='u-Cart-r']").attr('cart_id')+'.';
+                }
+            });
+            if(cart_id==''){
+                alert('请至少选择一个商品');
+                location.href="shopcart"
+            }
+            cart_id=cart_id.substr(0,cart_id.length-1);
+            var _token=$("#_token").val();
+            $.post(
+                '{{url('cart/del')}}',
+                {cart_id:cart_id,_token:_token},
+                function (res){
+                    //console.log(res)
+                    if(res==1){
+                        alert('删除成功');
+                        location.href="{{url('shopcart')}}"
+                    }else if(res==2){
+                        alert('删除失败');
+                    }
+                }
+            )
+        })
+
+
         $(".add").click(function () {
             var t = $(this).prev();
             t.val(parseInt(t.val()) + 1);
@@ -146,13 +170,6 @@
             )
         })
     })
-    </script>
-
-
-
-    
-    <script>
-
     // 全选        
     $(".quanxuan").click(function () {
         if($(this).hasClass('current')){
@@ -198,23 +215,22 @@
         GetCount();
         //alert(conts);
     });
-  // 已选中的总额
+    // 已选中的总额
     function GetCount() {
         var conts = 0;
         var aa = 0;
-        var self=$('.self').text();
-        $(".g-Cart-list .xuan").each(function () {
-            if ($(this).hasClass("current")) {
-                for (var i = 0; i < $(this).length; i++) {
-                    conts += parseInt($(this).parents('li').find('input.text_box').val())*$('#self_price').text();
-                    // aa += 1;
-                }
+        $(".xuan").each(function () {
+            if($(this).attr('class')=='xuan current'){
+                var self_price=$(this).siblings("div[class='u-Cart-r']").find("a[class='self_price']").attr('self_price');
+                var buy_number=$(this).siblings("div[class='u-Cart-r']").find("input[class='text_box']").val();
+                conts+=parseInt(self_price)*parseInt(buy_number);
             }
         });
-        
-         $(".total").html('<span>￥</span>'+(conts).toFixed(2));
+
+        $(".total").html('<span>￥</span>'+(conts).toFixed(2));
     }
     GetCount();
-</script>
+
+    </script>
 </body>
 </html>

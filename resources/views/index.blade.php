@@ -53,7 +53,7 @@
 			<ul class="menu-list">
 				@foreach($cateInfo as $v)
 				<li>
-					<a href="{{url('cate')}}/{{$v->cate_id}}" class="cate" id="{{$v->cate_id}}">
+					<a href="{{url('cateshop')}}/{{$v->cate_id}}" cate_id="{{$v->cate_id}}">
 						<i class="xinpin"></i>
 						<span class="title">{{$v->cate_name}}</span>
 					</a>

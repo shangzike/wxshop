@@ -23,6 +23,7 @@ class ShopCartController extends Controller
     public function add(Request $request)
     {
         $goods_id=$request->goods_id;
+        var_dump($goods_id);die;
         $user_id=session('user_id');
         $where=[
             'user_id'=>$user_id,
@@ -73,11 +74,8 @@ class ShopCartController extends Controller
     public function del(Request $request)
     {
         $cart_id=$request->cart_id;
-        $where=[
-            'cart_id'=>$cart_id,
-            'cart_status'=>1
-        ];
-        $res=DB::table('shop_cart')->where($where)->update(['cart_status'=>2]);
+        $cart_id=explode('.',$cart_id);
+        $res=DB::table('shop_cart')->whereIn('cart_id',$cart_id)->update(['cart_status'=>2]);
         if($res){
             return 1;
         }else{
