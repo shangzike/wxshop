@@ -42,11 +42,14 @@
                             <a href="{{url('shopcontent')}}/{{$v->goods_id}}" class="gray6">{{$v->goods_name}}</a>
                             <span class="gray9">
                             <em>剩余{{$v->goods_num}}件</em>
-                                <em class="self">单价<a class="self_price" self_price="{{$v->self_price}}">{{$v->self_price}}</a>元</em>
+                                <em class="self">单价
+                                    <a class="self_price" self_price="{{$v->self_price}}">{{$v->self_price}}</a>元
+                                </em>
                             </span>
                             <div class="num-opt">
                                 <em class="num-mius dis min"><i></i></em>
-                                <input class="text_box" name="num" maxlength="6" type="text" value="{{$v->buy_number}}" codeid="12501977">
+                                <input class="text_box" name="num"  maxlength="6" type="text"
+                                  cart_id="{{$v->cart_id}}"     goods_id="{{$v->goods_id}}" value="{{$v->buy_number}}" goods_num="{{$v->goods_num}}" codeid="12501977">
                                 <em class="num-add add"><i></i></em>
                             </div>
                             <a href="javascript:;" name="delLink" cid="12501977" isover="0" class="z-del"><s></s></a>
@@ -62,7 +65,7 @@
                 <dt class="gray6">
                     <s class="quanxuan current"></s>全选
                     <p class="money-total">合计<em class="orange total"><span>￥</span>17.00</em></p>
-                    
+
                 </dt>
                 <dd>
                     <a href="javascript:;" id="a_payment" class="orangeBtn w_account remove">删除</a>
@@ -86,6 +89,65 @@
 <!---商品加减算总数---->
     <script type="text/javascript">
     $(function () {
+
+        //加
+        $(document).on('click','.num-add',function () {
+            var buy_number=parseInt($(this).prev().val());
+            var goods_id=$(this).prev().attr('goods_id');
+            var goods_num=$(this).prev().attr('goods_num');
+            var cart_id=$(this).prev().attr('cart_id');
+            // if(buy_number>=goods_num){
+            //     alert('库存不足');
+            //     _this.prop('disabled',true);
+            // }
+            cart(cart_id,buy_number)
+        })
+
+        //减
+        $(document).on('click','.num-mius',function () {
+            var buy_number=parseInt($(this).next().val());
+            var goods_id=$(this).next().attr('goods_id');
+            var goods_num=$(this).next().attr('goods_num');
+            var cart_id=$(this).next().attr('cart_id');
+            cart(cart_id,buy_number)
+        })
+
+        //数量
+        $(document).on('blur','.text_box',function () {
+            var _this=$(this);
+            var buy_number=parseInt($(this).val());
+            var goods_id=$(this).attr('goods_id');
+            var goods_num=$(this).attr('goods_num');
+            var reg=/^[1-9]\d*$/;
+            var cart_id=$(this).attr('cart_id');
+
+            if(!reg.test(buy_number)){
+                _this.val(1)
+            }else if(buy_number<=1){
+                _this.val(1)
+            }else if(buy_number>=goods_num){
+                _this.val(goods_num)
+            }else{
+                _this.val(buy_number)
+            }
+            cart(cart_id,buy_number)
+        })
+
+        //修改购物车个数
+        function cart(cart_id,buy_number){
+            var _token=$("#_token").val();
+            $.post(
+                "{{url('cartnum')}}",
+                {cart_id:cart_id,buy_number:buy_number,_token:_token},
+                function (res) {
+                    console.log(res);
+                }
+
+            )
+        }
+
+
+
         $('.order').click(function () {
             var cart_id='';
             $('.xuan').each(function () {
@@ -170,17 +232,17 @@
             )
         })
     })
-    // 全选        
+    // 全选
     $(".quanxuan").click(function () {
         if($(this).hasClass('current')){
             $(this).removeClass('current');
 
              $(".g-Cart-list .xuan").each(function () {
                 if ($(this).hasClass("current")) {
-                    $(this).removeClass("current"); 
+                    $(this).removeClass("current");
                 } else {
                     $(this).addClass("current");
-                } 
+                }
             });
             GetCount();
         }else{
@@ -192,13 +254,13 @@
             });
             GetCount();
         }
-        
-        
+
+
     });
     // 单选
     $(".g-Cart-list .xuan").click(function () {
         if($(this).hasClass('current')){
-            
+
 
             $(this).removeClass('current');
 

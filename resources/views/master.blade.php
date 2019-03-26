@@ -18,7 +18,11 @@
     <link href="{{url('css/cartlist.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{url('css/address.css')}}">
     <link rel="stylesheet" href="{{url('css/buyrecord.css')}}">
-
+    <link href="{{url('css/mywallet.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/safeset.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/login.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/findpwd.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{url('css/modipwd.css')}}">
 </head>
 <body fnav="1" class="g-acc-bg">
 @yield('content')
@@ -35,5 +39,4 @@
 <script src="{{url('js/all.js')}}"></script>
 <script src="{{url('js/index.js')}}"></script>
 <script src="{{url('js/lazyload.min.js')}}"></script>
-
 @yield('my-js')

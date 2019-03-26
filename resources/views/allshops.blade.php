@@ -96,7 +96,7 @@
                                         <img class="lazy" data-original="{{$v->goods_img}}">
                                     </span>
                                             <div class="gList_r">
-                                                <h3 class="gray6">{{$v->goods_name}}</h3>
+                                                <h3 class="gray6"><a href="{{url('shopcontent')}}/{{$v->goods_id}}">{{$v->goods_name}}</a></h3>
                                                 <em class="gray9">价值：￥{{$v->self_price}}</em>
                                                 <div class="gRate">
                                                     <div class="Progress-bar">
@@ -111,7 +111,7 @@
                                                             <li class="P-bar03"><em>{{$v->goods_num}}</em>剩余</li>
                                                         </ul>
                                                     </div>
-                                                    <p class="cartadd"><a codeid="12785750"  goods_id="{{$v->goods_id}}" canbuy="646" src=""><s></s></a></p>
+                                                    <p class="cartadd"><a codeid="12785750"  goods_id="{{$v->goods_id}}" canbuy="646" src=""></a></p>
                                                 </div>
                                             </div>
                                         </li>
@@ -174,13 +174,14 @@
             })
             //加入购物车
             $(document).on('click',".cartadd",function () {
-                var goods_id=$(this).attr('goods_id');
+                var goods_id=$(this).children('a').attr('goods_id');
+
                 var _token=$("#_token").val();
                 $.post(
                     '{{url('cart/add')}}',
                     {goods_id:goods_id,_token:_token},
                     function (res) {
-                        // console.log(res)
+                         // console.log(res)
                         if(res==1){
                             alert("加入购物车成功");
                             location.href="{{url('shopcart')}}";

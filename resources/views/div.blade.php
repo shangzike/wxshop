@@ -8,7 +8,7 @@
                                        <img class="lazy" name="goodsImg"  src="{{$v->goods_img}}"/>
                                     </span>
                         <div class="gList_r">
-                            <h3 class="gray6">{{$v->goods_name}}</h3>
+                            <h3 class="gray6"><a href="{{url('shopcontent')}}/{{$v->goods_id}}">{{$v->goods_name}}</a></h3>
                             <em class="gray9">价值：￥{{$v->self_price}}</em>
                             <div class="gRate">
                                 <div class="Progress-bar">
@@ -20,10 +20,10 @@
                                     <ul class="Pro-bar-li">
                                         <li class="P-bar01"><em>7342</em>已参与</li>
                                         <li class="P-bar02"><em>7988</em>总需人次</li>
-                                        <li class="P-bar03"><em>646</em>剩余</li>
+                                        <li class="P-bar03"><em>{{$v->goods_num}}</em>剩余</li>
                                     </ul>
                                 </div>
-                                <a codeid="12785750" class="" canbuy="646" ><s ></s></a>
+                                <p class="cartadd"><a codeid="12785750"  goods_id="{{$v->goods_id}}" canbuy="646" src=""></a></p>
                             </div>
                         </div>
                     </li>

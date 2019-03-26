@@ -33,7 +33,7 @@
                     <s class="fr"></s>
                 </li>
                 <li>
-                    <a href="">安全设置</a>
+                    <a href="{{url('safeset')}}">安全设置</a>
                     <s class="fr"></s>
                 </li>
                 <li>

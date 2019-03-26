@@ -19,7 +19,7 @@
 <div class="m-block-header" id="div-header">
     <strong id="m-title">填写收货地址</strong>
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
-    <a href="#" class="m-index-icon">保存</a>
+    <span class="m-index-icon">保存</span>
 </div>
 <div class=""></div>
 <!-- <form class="layui-form" action="">
@@ -32,12 +32,13 @@
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
       <li><em>收货人</em><input type="text" name="address_name" id="address_name" placeholder="请填写真实姓名"></li>
       <li><em>手机号码</em><input type="number" name="address_tel" id="address_tel" placeholder="请输入手机号"></li>
-      <li><em>所在区域</em><input id="demo1" type="text"  name="input_area"  id='input_area' placeholder="请选择所在区域"></li>
+      <li><em>所在区域</em><input id="demo1" type="text"  name="input_area"   placeholder="请选择所在区域"></li>
       <li class="addr-detail"><em>详细地址</em><input type="text" name="input_detail" id="input_detail" placeholder="20个字以内" class="addr"></li>
     </ul>
     <div class="setnormal"><span>设为默认地址</span><input type="checkbox" name="is_detail" id="is_detail" lay-skin="switch">  </div>
   </div>
 </form>
+
 
 <!-- SUI mobile -->
 <script src="{{url('dist/js/LArea.js')}}"></script>
@@ -55,19 +56,21 @@ layui.use('form', function(){
     $('.m-index-icon').click(function () {
         var address_name=$("#address_name").val();
         var address_tel=$("#address_tel").val();
-        var input_area=$("#input_area").val();
+        var input_area=$("#demo1").val();
         var input_detail=$("#input_detail").val();
         var is_detail=$("#is_detail").prop('checked');
         var _token=$("#_token").val();
+
         $.post(
             '{{url('address/add')}}',
-            {_token:_token,address_name:address_name,address_tel:address_tel,input_area:input_area,input_detail:input_detail,is_detail:is_detail},
+            {_token:_token,address_name:address_name,address_tel:address_tel,area:input_area,address_detail:input_detail,is_default:is_detail},
             function (res) {
-                console.log(res)
-                if(res==1){
-                    layer.msg('添加成功',{icon:1})
-                }else if(res==2){
-                    layer.msg('添加失败',{icon:2})
+                // console.log(res)
+                 if(res=='添加成功'){
+                    layer.msg('添加成功',{icon:1});
+                    location.href="index";
+                }else{
+                    layer.msg(res,{icon:2});
                 }
             }
         )

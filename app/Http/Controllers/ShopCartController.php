@@ -82,4 +82,17 @@ class ShopCartController extends Controller
             return 2;
         }
     }
+    
+    //修改个数
+    public function cartnum(Request $request)
+    {
+        $cart_id=$request->cart_id;
+        $buy_number=$request->buy_number;
+        $res=DB::table('shop_cart')->where(['cart_id'=>$cart_id])->update(['buy_number'=>$buy_number]);
+        if($res){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
 }

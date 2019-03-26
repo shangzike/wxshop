@@ -30,6 +30,7 @@ Route::any('cateshop/{id}','AllshopsController@cateshop');//点击分类
 Route::any('shopcart','ShopCartController@index')->middleware('login');
 Route::any('cart/add','ShopCartController@add')->middleware('login');
 Route::any('cart/del','ShopCartController@del')->middleware('login');
+Route::any('cartnum','ShopCartController@cartnum')->middleware('login');
 //我的
 Route::any('userindex','UserController@index');
 route::any('edituser',"UserController@edituser")->middleware('login');
@@ -51,8 +52,12 @@ route::any('verify/create','CaptchaController@create');
 //收货地址
 Route::prefix('address')->group(function () {
     Route::get('index', 'Order\addressController@index');
-    Route::get('writeaddr', 'Order\addressController@writeaddr');
+    Route::any('writeaddr', 'Order\addressController@writeaddr');
     Route::any('add', 'Order\addressController@add');
+    Route::any('del', 'Order\addressController@del');
+    Route::any('edit/{id}', 'Order\addressController@edit');
+    Route::any('editdo', 'Order\addressController@editdo');
+    Route::any('setdefalt', 'Order\addressController@setdefalt');
 });
 
 //结算
@@ -62,7 +67,9 @@ Route::any('order/pat/{id}', 'Order\patmentController@pay');
 //潮购记录
 Route::any('buyrecord', 'User\buyrecordController@buyrecord');
 //我的钱包
-Route::any('mywallet', 'User\mywalletController@mywallet');
-
+Route::any('mywallet', 'User\mywalletController@mywallet')->middleware('login');
+Route::any('safeset', 'User\safesetController@safeset')->middleware('login');
+Route::any('loginpwd', 'User\safesetController@loginpwd')->middleware('login');//修改密码
+Route::any('pwd', 'User\safesetController@pwd')->middleware('login');
 
 

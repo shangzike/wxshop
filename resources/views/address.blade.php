@@ -11,45 +11,32 @@
     <a href="{{url('address/writeaddr')}}" class="m-index-icon">添加</a>
 </div>
 <div class="addr-wrapp">
+    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+    @foreach($data as $v)
     <div class="addr-list">
          <ul>
             <li class="clearfix">
-                <span class="fl">兰兰</span>
-                <span class="fr">15034008459</span>
+                <span class="fl">{{$v->address_name}}</span>
+                <span class="fr">{{$v->address_tel}}</span>
             </li>
             <li>
-                <p>北京市东城区起来我来了</p>
+                <p>{{$v->area}}{{$v->address_detail}}</p>
             </li>
             <li class="a-set">
+                @if($v->is_default==1)
                 <s class="z-set" style="margin-top: 6px;"></s>
-                <span>设为默认</span>
-                <div class="fr">
-                    <span class="edit">编辑</span>
+                @else
+                <s class="z-defalt" style="margin-top: 6px;" ></s>
+                @endif
+                <span class="moren">设为默认</span>
+                <div class="fr" address_id="{{$v->address_id}}">
+                    <a href="{{url('address/edit')}}/{{$v->address_id}}" class="edit">编辑</a>
                     <span class="remove">删除</span>
                 </div>
             </li>
         </ul>  
     </div>
-    <div class="addr-list">
-         <ul>
-            <li class="clearfix">
-                <span class="fl">兰兰</span>
-                <span class="fr">15034008459</span>
-            </li>
-            <li>
-                <p>北京市东城区起来我来了</p>
-            </li>
-            <li class="a-set">
-                <s class="z-defalt" style="margin-top: 6px;"></s>
-                <span>设为默认</span>
-                <div class="fr">
-                    <span class="edit">编辑</span>
-                    <span class="remove">删除</span>
-                </div>
-            </li>
-        </ul>  
-    </div>
-   
+   @endforeach
 </div>
 @endsection
 @section('my-js')
@@ -60,28 +47,62 @@
 
 <!-- 单选 -->
 <script>
-    
+    //设为默认
+    $(document).on('click','.moren', function () {
+        var address_id=$(this).next('div').attr('address_id');
 
+        var _token=$("#_token").val();
+        $.post(
+            '{{url('address/setdefalt')}}',
+            {address_id:address_id,_token:_token},
+            function (res) {
+                // console.log(res);
+                if(res==1){
+                    alert('设置成功');
+
+                }else{
+                    alert('设置失败');
+                }
+                history.go(0);
+            }
+        )
+    })
      // 删除地址
-    $(document).on('click','span.remove', function () {
-        var buttons1 = [
-            {
-              text: '删除',
-              bold: true,
-              color: 'danger',
-              onClick: function() {
-                $.alert("您确定删除吗？");
-              }
+    $(document).on('click','.remove', function () {
+        var address_id=$(this).parent().attr('address_id');
+        var _token=$("#_token").val();
+        $.post(
+            "{{url('address/del')}}",
+            {address_id:address_id,_token:_token},
+            function (res) {
+                if(res==1){
+                    alert('删除成功')
+                    history.go(0);
+                }else if(res==2){
+                    alert('删除失败')
+                }
+
             }
-          ];
-          var buttons2 = [
-            {
-              text: '取消',
-              bg: 'danger'
-            }
-          ];
-          var groups = [buttons1, buttons2];
-          $.actions(groups);
+        )
+
+        // var buttons1 = [
+        //     {
+        //       text: '删除',
+        //       bold: true,
+        //       color: 'danger',
+        //       onClick: function() {
+        //         $.alert("您确定删除吗？");
+        //       }
+        //     }
+        //   ];
+        //   var buttons2 = [
+        //     {
+        //       text: '取消',
+        //       bg: 'danger'
+        //     }
+        //   ];
+          // var groups = [buttons1, buttons2];
+          // $.actions(groups);
     });
 </script>
 <script src="{{url('js/jquery-1.8.3.min.js')}}"></script>
