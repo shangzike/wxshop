@@ -212,7 +212,7 @@
                 <div class="pro_foot"> 
                         <a href="" class="">第10364潮正在进行中<span class="dotting"></span></a>
                         <a href="" class="shopping">立即参与</a>
-                        <span href="" class="fr cartadd" goods_id="{{$res->goods_id}}"><i><b num="1" >1</b></i></span>
+                        <span href="" class="fr cartadd" user_id="{{session('user_id')}}" goods_id="{{$res->goods_id}}"><i><b num="1" >1</b></i></span>
                 </div>
             </div>
         </div>
@@ -226,24 +226,31 @@
     $(function () {
         //加入购物车
         $(document).on('click',".cartadd",function () {
-            var goods_id=$(this).attr('goods_id');
-            var _token=$("#_token").val();
-            $.post(
-                '{{url('cart/add')}}',
-                {goods_id:goods_id,_token:_token},
-                function (res) {
-                    // console.log(res)
-                    if(res==1){
-                        alert("加入购物车成功");
-                        location.href="{{url('shopcart')}}";
-                    }else if(res==2){
-                        alert("加入购物车失败");
-                        location.href="{{url('/')}}";
-                    }else if(res==3){
-                        alert("超过库存");
+            var user_id=$(this).attr('user_id')
+            if(user_id!=''){
+                var goods_id=$(this).attr('goods_id');
+                var _token=$("#_token").val();
+                $.post(
+                    '{{url('cart/add')}}',
+                    {goods_id:goods_id,_token:_token},
+                    function (res) {
+                        // console.log(res)
+                        if(res==1){
+                            alert("加入购物车成功");
+                            location.href="{{url('shopcart')}}";
+                        }else if(res==2){
+                            alert("加入购物车失败");
+                            location.href="{{url('/')}}";
+                        }else if(res==3){
+                            alert("超过库存");
+                        }
                     }
-                }
-            )
+                )
+            }else{
+                alert('请先登录');
+                location.href="{{url('login')}}";
+            }
+
         })
 
         $('.hotimg').flexslider({   

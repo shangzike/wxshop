@@ -111,7 +111,7 @@
                                                             <li class="P-bar03"><em>{{$v->goods_num}}</em>剩余</li>
                                                         </ul>
                                                     </div>
-                                                    <p class="cartadd"><a codeid="12785750"  goods_id="{{$v->goods_id}}" canbuy="646" src=""></a></p>
+                                                    <p><a class="cartadd"   goods_id="{{$v->goods_id}}" user_id="{{session('user_id')}}" canbuy="646" src=""></a></p>
                                                 </div>
                                             </div>
                                         </li>
@@ -172,34 +172,35 @@
                     }
                 )
             })
-            
-            //搜索
-            $(document).on('change','#txtSearch',function () {
-                var sou=$(this).val();
-                console.log(sou)
-            })
+
             //加入购物车
             $(document).on('click',".cartadd",function () {
-                var goods_id=$(this).children('a').attr('goods_id');
-
-                var _token=$("#_token").val();
-                $.post(
-                    '{{url('cart/add')}}',
-                    {goods_id:goods_id,_token:_token},
-                    function (res) {
-                         // console.log(res)
-                        if(res==1){
-                            alert("加入购物车成功");
-                            location.href="{{url('shopcart')}}";
-                        }else if(res==2){
-                            alert("加入购物车失败");
-                            location.href="{{url('/')}}";
-                        }else if(res==3){
-                            alert("超过库存");
+                var user_id=$(this).attr('user_id');
+                if(user_id!=''){
+                    var goods_id=$(this).attr('goods_id');
+                    var _token=$("#_token").val();
+                    $.post(
+                        '{{url('cart/add')}}',
+                        {goods_id:goods_id,_token:_token},
+                        function (res) {
+                            // console.log(1)
+                            if(res==1){
+                                alert("加入购物车成功");
+                                location.href="{{url('shopcart')}}";
+                            }else if(res==2){
+                                alert("加入购物车失败");
+                                location.href="{{url('/')}}";
+                            }else if(res==3){
+                                alert("超过库存");
+                            }
                         }
-                    }
-                )
+                    )
+                }else{
+                    alert('请先登录');
+                    location.href="{{url('login')}}";
+                }
             })
+
         })
     
 </script>

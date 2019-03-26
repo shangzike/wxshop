@@ -117,7 +117,7 @@
 					<div class="btn-wrap" name="buyBox" limitbuy="0" surplus="58" totalnum="1625" alreadybuy="1567" >
 						<a href="{{url('shopcontent')}}/{{$v->goods_id}}" class="buy-btn" codeid="12751965">立即潮购</a>
 						<div class="gRate" codeid="12751965" canbuy="58">
-							<a href="javascript:;" class="cartadd" goods_id="{{$v->goods_id}}"></a>
+							<a href="javascript:;" class="cartadd" user_id="{{session('user_id')}}" goods_id="{{$v->goods_id}}"></a>
 						</div>
 					</div>
 				</li>
@@ -152,24 +152,31 @@
 	<script>
         $(function () {
             $(document).on('click',".cartadd",function () {
-                var goods_id=$(this).attr('goods_id');
-                var _token=$("#_token").val();
-                $.post(
-                    '{{url('cart/add')}}',
-                    {goods_id:goods_id,_token:_token},
-                    function (res) {
-                        // console.log(res)
-                        if(res==1){
-                            alert("加入购物车成功");
-                            location.href="{{url('shopcart')}}";
-                        }else if(res==2){
-                            alert("加入购物车失败");
-                            location.href="{{url('/')}}";
-                        }else if(res==3){
-                            alert("超过库存");
+                var user_id=$(this).attr('user_id');
+                if(user_id==''){
+                    alert('请先登录')
+					location.href="{{url('login')}}";
+				}else{
+                    var goods_id=$(this).attr('goods_id');
+                    var _token=$("#_token").val();
+                    $.post(
+                        '{{url('cart/add')}}',
+                        {goods_id:goods_id,_token:_token},
+                        function (res) {
+                            // console.log(res)
+                            if(res==1){
+                                alert("加入购物车成功");
+                                location.href="{{url('shopcart')}}";
+                            }else if(res==2){
+                                alert("加入购物车失败");
+                                location.href="{{url('/')}}";
+                            }else if(res==3){
+                                alert("超过库存");
+                            }
                         }
-                    }
-                )
+                    )
+				}
+
             })
 
             $('.hotimg').flexslider({

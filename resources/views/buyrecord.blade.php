@@ -56,11 +56,12 @@
                 <s class="default"></s>您还没有购买商品哦~
             </div>
             <div class="hot-recom">
-
             </div>
         </ul>
     </div>
 </div>
+
+
 @endsection
 
 @section('my-js')

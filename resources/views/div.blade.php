@@ -23,7 +23,7 @@
                                         <li class="P-bar03"><em>{{$v->goods_num}}</em>剩余</li>
                                     </ul>
                                 </div>
-                                <p class="cartadd"><a codeid="12785750"  goods_id="{{$v->goods_id}}" canbuy="646" src=""></a></p>
+                                <p ><a codeid="12785750" class="cartadd" goods_id="{{$v->goods_id}}"  user_id="{{session('user_id')}}" canbuy="646" src=""></a></p>
                             </div>
                         </div>
                     </li>
