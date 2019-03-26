@@ -56,104 +56,11 @@
                 <s class="default"></s>您还没有购买商品哦~
             </div>
             <div class="hot-recom">
-                <div class="title thin-bor-top gray6">
-                    <span><b class="z-set"></b>人气推荐</span>
-                    <em></em>
-                </div>
-                <div class="goods-wrap thin-bor-top">
-                    <ul class="goods-list clearfix">
-                        <li>
-                            <a href="https://m.1yyg.com/v44/products/23458.do" class="g-pic">
-                                <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                            </a>
-                            <p class="g-name">
-                                <a href="https://m.1yyg.com/v44/products/23458.do">(第<i>368671</i>潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                            </p>
-                            <ins class="gray9">价值:￥7130</ins>
-                            <div class="btn-wrap">
-                                <div class="Progress-bar">
-                                    <p class="u-progress">
-                                        <span class="pgbar" style="width:1%;">
-                                            <span class="pging"></span>
-                                        </span>
-                                    </p>
-                                </div>
-                                <div class="gRate" data-productid="23458">
-                                    <a href="javascript:;"><s></s></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="" class="g-pic">
-                                <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                            </a>
-                            <p class="g-name">
-                                <a href="https://m.1yyg.com/v44/products/23458.do">(第368671潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                            </p>
-                            <ins class="gray9">价值:￥7130</ins>
-                            <div class="btn-wrap">
-                                <div class="Progress-bar">
-                                    <p class="u-progress">
-                                        <span class="pgbar" style="width:45%;">
-                                            <span class="pging"></span>
-                                        </span>
-                                    </p>
-                                </div>
-                                <div class="gRate" data-productid="23458">
-                                    <a href="javascript:;"><s></s></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="https://m.1yyg.com/v44/products/23458.do" class="g-pic">
-                                <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                            </a>
-                            <p class="g-name">
-                                <a href="https://m.1yyg.com/v44/products/23458.do">(第<i>368671</i>潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                            </p>
-                            <ins class="gray9">价值:￥7130</ins>
-                            <div class="btn-wrap">
-                                <div class="Progress-bar">
-                                    <p class="u-progress">
-                                        <span class="pgbar" style="width:1%;">
-                                            <span class="pging"></span>
-                                        </span>
-                                    </p>
-                                </div>
-                                <div class="gRate" data-productid="23458">
-                                    <a href="javascript:;"><s></s></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="https://m.1yyg.com/v44/products/23458.do" class="g-pic">
-                                <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                            </a>
-                            <p class="g-name">
-                                <a href="https://m.1yyg.com/v44/products/23458.do">(第368671潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                            </p>
-                            <ins class="gray9">价值:￥7130</ins>
-                            <div class="btn-wrap">
-                                <div class="Progress-bar">
-                                    <p class="u-progress">
-                                        <span class="pgbar" style="width:1%;">
-                                            <span class="pging"></span>
-                                        </span>
-                                    </p>
-                                </div>
-                                <div class="gRate" data-productid="23458">
-                                    <a href="javascript:;"><s></s></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
         </ul>
     </div>
 </div>
-
-
 @endsection
 
 @section('my-js')

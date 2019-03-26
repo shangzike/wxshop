@@ -57,14 +57,11 @@ class AllshopsController extends Controller
     //首页点击 分类
     public function cateshop($cate_id)
     {
-        echo '不会';
-//        //分类
-//        $cate=DB::table('shop_cate')->where('pid','=',0)->get();
-//        $this->getCateIdInfo($cate_id);
-//        $arr=self::$arrCate;
-//        $data=DB::table('shop_goods')->where('is_up','=',1)->whereIn('cate_id',$arr)->orderBy('update_time','desc')->get();
-//        return view('allshops',['data'=>$data],['cate'=>$cate])
-//            ->with('id',$cate_id);
+        $cate=DB::table('shop_cate')->where('pid','=',0)->get();
+        $arr=$this->cateInfoPid($cate,$cate_id);
+        $data=DB::table('shop_goods')->where('is_up','=',1)->whereIn('cate_id',$arr)->orderBy('update_time','desc')->get();
+        return view('allshops',['data'=>$data],['cate'=>$cate])
+            ->with('id',$cate_id);
     }
     
     //价格 最新

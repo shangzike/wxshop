@@ -53,7 +53,7 @@
 			<ul class="menu-list">
 				@foreach($cateInfo as $v)
 				<li>
-					<a href="{{url('cateshop')}}/{{$v->cate_id}}" cate_id="{{$v->cate_id}}">
+					<a href="{{url('cateshop')}}/{{$v->cate_id}}" id="btnNew" cate_id="{{$v->cate_id}}">
 						<i class="xinpin"></i>
 						<span class="title">{{$v->cate_name}}</span>
 					</a>
@@ -62,26 +62,6 @@
 			</ul>
 		</div>
 		<!--导航-->
-		<div class="success-tip">
-			<div class="left-icon"></div>
-			<ul class="right-con">
-				<li>
-				<span style="color: #4E555E;">
-					<a href="./index.php?i=107&amp;c=entry&amp;id=10&amp;do=notice&amp;m=weliam_indiana" style="color: #4E555E;">恭喜<span class="username">啊啊啊</span>获得了<span>iphone7 红色 128G 闪耀你的眼</span></a>
-				</span>
-				</li>
-				<li>
-				<span style="color: #4E555E;">
-					<a href="./index.php?i=107&amp;c=entry&amp;id=10&amp;do=notice&amp;m=weliam_indiana" style="color: #4E555E;">恭喜<span class="username">啊啊啊</span>获得了<span>iphone7 红色 128G 闪耀你的眼</span></a>
-				</span>
-				</li>
-				<li>
-				<span style="color: #4E555E;">
-					<a href="./index.php?i=107&amp;c=entry&amp;id=10&amp;do=notice&amp;m=weliam_indiana" style="color: #4E555E;">恭喜<span class="username">啊啊啊</span>获得了<span>iphone7 红色 128G 闪耀你的眼</span></a>
-				</span>
-				</li>
-			</ul>
-		</div>
 		<input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
 		<!-- 热门推荐 -->
 		<div class="line hot">
