@@ -43,7 +43,8 @@ layui.use(['layer','form'], function(){
             data.field,
             function (res) {
                 if(res==1){
-                   alert('修改成功')
+                    alert('修改成功')
+                    location.href="{{url('login')}}";
                 }else{
                     layer.msg(res,{icon:2});
                 }

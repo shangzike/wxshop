@@ -18,7 +18,7 @@ class safesetController extends Controller
     {
         return view('loginpwd');
     }
-
+//修改密码
     public function pwd(Request $request)
     {
         $user_id=session('user_id');

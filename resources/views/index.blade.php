@@ -150,7 +150,7 @@
 			<ul>
 				<li class="f_home"><a href="{{url('/')}}" class="hover"><i></i>潮购</a></li>
 				<li class="f_announced"><a href="{{url('allshops')}}" ><i></i>所有商品</a></li>
-				<li class="f_single"><a href="{{url('share')}}" ><i></i>晒单</a></li>
+				<li class=""><a href="#" ><i></i></a></li>
 				<li class="f_car"><a id="btnCart" href="{{url('shopcart')}}" ><i></i>购物车</a></li>
 				<li class="f_personal"><a href="{{url('userindex')}}" ><i></i>我的潮购</a></li>
 			</ul>

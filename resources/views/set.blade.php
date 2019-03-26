@@ -32,7 +32,7 @@
                     <a href="">邀请有奖</a>
                     <s class="fr"></s>
                 </li>
-                <li>
+                <li class="safeset">
                     <a href="{{url('safeset')}}">安全设置</a>
                     <s class="fr"></s>
                 </li>
@@ -49,3 +49,5 @@
     </div>
 </body>
 </html>
+<script>
+</script>
