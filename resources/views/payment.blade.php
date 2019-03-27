@@ -33,7 +33,7 @@
             <div id="divMore">
                 
             </div>
-            <p class="gray9">总需支付金额：<em class="orange"><i>￥</i>{{$buy_number}}</em></p>
+            <p class="gray9">总需支付金额：<em><i>￥</i>{{$buy_number}}</em></p>
         </div>
 
         <div class="other_pay marginB">
@@ -45,7 +45,7 @@
             	<i></i>账户总额：<span class="gray9">(￥<em>0.00</em>)</span><em class="orange fr"></em>
             </a>
             <a href="javascript:;" class="wzf checked">
-            	<b class="z-set"></b>第三方支付<em class="orange fr"><span class="colorbbb">需要支付&nbsp;</span><b>￥</b>1.00</em>
+            	<b class="z-set"></b>第三方支付<em class=" fr"><span class="colorbbb">需要支付&nbsp;</span><b>￥</b>{{$buy_number}}</em>
             </a>
             <div class="net-pay">
                 <a href="javascript:;" class="checked" id="jdPay">

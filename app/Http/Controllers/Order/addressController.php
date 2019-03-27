@@ -30,6 +30,9 @@ class addressController extends Controller
         unset($data['_token']);
 
         $user_id=session('user_id');
+        if(empty($user_id)){
+            return '请先登录'; die;
+        }
         if($data['address_name']==''){
             return '姓名不能为空'; die;
         }

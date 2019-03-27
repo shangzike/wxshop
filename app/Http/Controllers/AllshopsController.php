@@ -6,6 +6,7 @@ use App\Models\v2\RegExtendInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Model\Goods;
+use think\console\command\make\Model;
 class AllshopsController extends Controller
 {
     //全部商品
@@ -36,7 +37,7 @@ class AllshopsController extends Controller
             return view('div',['goods_data'=>$goods_data]);
         }
     }
-        private function cateInfoPid($info,$pid){
+    private function cateInfoPid($info,$pid){
             static $data=[];
             foreach($info as $v){
                 if($v->pid==$pid){
@@ -84,5 +85,19 @@ class AllshopsController extends Controller
         }
 
         return view('div',['goods_data'=>$goods_data]);
+    }
+    
+    //搜索
+    public function search()
+    {
+        return view('search');
+    }
+
+    public function searchdo(Request $request)
+    {
+        $goods_name=$request->goods_name;
+        $goodsModel=new Goods;
+        $goods_data=$goodsModel::where('goods_name','like',"%$goods_name%")->get();
+        return view('searchdiv',['goods_data'=>$goods_data]);
     }
 }

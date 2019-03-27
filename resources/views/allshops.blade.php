@@ -201,6 +201,11 @@
                 }
             })
 
+            //搜索
+            $(document).on('focus','#txtSearch',function () {
+                location.href="{{url('search')}}";
+            })
+
         })
     
 </script>

@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-
 class Goods extends Model
 {
     /**
@@ -18,5 +17,6 @@ class Goods extends Model
      * @var string
      */
     protected $primaryKey = 'goods_id';
-    
+
+    public  $timestamps =false;
 }

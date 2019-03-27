@@ -26,6 +26,8 @@ Route::any('cate','AllshopsController@cate');//点击分类
 Route::any('sortshop','AllshopsController@sortshop');
 Route::any('default','AllshopsController@default');//价格 库存
 Route::any('cateshop/{id}','AllshopsController@cateshop');//点击分类
+Route::any('search', 'AllshopsController@search');
+Route::any('searchdo', 'AllshopsController@searchdo');
 //购物车
 Route::any('shopcart','ShopCartController@index')->middleware('login');
 Route::any('cart/add','ShopCartController@add')->middleware('login');
@@ -51,18 +53,18 @@ Route::any('phone','LoginController@phone');
 route::any('verify/create','CaptchaController@create');
 //收货地址
 Route::prefix('address')->group(function () {
-    Route::get('index', 'Order\addressController@index');
-    Route::any('writeaddr', 'Order\addressController@writeaddr');
-    Route::any('add', 'Order\addressController@add');
-    Route::any('del', 'Order\addressController@del');
-    Route::any('edit/{id}', 'Order\addressController@edit');
-    Route::any('editdo', 'Order\addressController@editdo');
-    Route::any('setdefalt', 'Order\addressController@setdefalt');
+    Route::get('index', 'Order\addressController@index')->middleware('login');
+    Route::any('writeaddr', 'Order\addressController@writeaddr')->middleware('login');
+    Route::any('add', 'Order\addressController@add')->middleware('login');
+    Route::any('del', 'Order\addressController@del')->middleware('login');
+    Route::any('edit/{id}', 'Order\addressController@edit')->middleware('login');
+    Route::any('editdo', 'Order\addressController@editdo')->middleware('login');
+    Route::any('setdefalt', 'Order\addressController@setdefalt')->middleware('login');
 });
 
 //结算
-Route::any('order', 'Order\patmentController@patment');
-Route::any('order/pat/{id}', 'Order\patmentController@pay');
+Route::any('order', 'Order\patmentController@patment')->middleware('login');
+Route::any('order/pat/{id}', 'Order\patmentController@pay')->middleware('login');
 
 //潮购记录
 Route::any('buyrecord', 'User\buyrecordController@buyrecord');
@@ -72,4 +74,10 @@ Route::any('safeset', 'User\safesetController@safeset')->middleware('login');
 Route::any('loginpwd', 'User\safesetController@loginpwd')->middleware('login');//修改密码
 Route::any('pwd', 'User\safesetController@pwd')->middleware('login');
 
+
+Route::prefix('pay')->group(function (){
+   Route::any('pay','Pay\payController@pay')->middleware('login');
+   route::any('return','Pay\payController@return')->middleware('login');
+   route::any('notify','Pay\payController@notify')->middleware('login');
+});
 
