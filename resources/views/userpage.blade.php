@@ -4,32 +4,27 @@
 @endsection
 @section('content')
 <body class="g-acc-bg">
-    
-    <div class="welcome" style="display: none">
-        <p>Hi，等你好久了！</p>
-        @if(empty(session('user_id'))){
-            <a href="" class="orange">登录</a>
-            <a href="" class="orange">注册</a>
+    <div>
+        @if(empty($user_id))
+            <div class="welcome">
+                <p>Hi，等你好久了！</p>
+                <a href="{{url('login')}}" class="orange">登录</a>
+                <a href="{{url('register')}}" class="orange">注册</a>
+            </div>
         @else
-            <a href="" class="orange">欢迎{{session('user_name')}}登录</a>
+            <div class="welcome">
+                <a href="{{url('set')}}"><i class="set"></i></a>
+                <div class="login-img clearfix">
+                    <ul>
+                        <li><img src="images/goods2.jpg" alt=""></li>
+                        <li class="name">
+                            <h3>{{session('user_name')}}</h3>
+                            <p>ID：{{session('user_id')}}</p>
+                        </li>
+                        <li class="next fr"><a href="{{url('edituser')}}"><s></s></a></li>
+                    </ul>
+                </div>
         @endif
-
-    </div>
-
-    <div class="welcome">
-        <a href="{{url('set')}}"><i class="set"></i></a>
-        <div class="login-img clearfix">
-            <ul>
-                <li><img src="images/goods2.jpg" alt=""></li>
-                <li class="name">
-                    <h3>{{session('user_name')}}</h3>
-                    <p>ID：{{session('user_id')}}</p>
-                </li>
-                <li class="next fr"><a href="{{url('edituser')}}"><s></s></a></li>
-            </ul>
-        </div>
-
-
     </div>
     <!--获得的商品-->
     

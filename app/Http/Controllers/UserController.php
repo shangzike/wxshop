@@ -10,7 +10,8 @@ class UserController extends Controller
     //我的
     public function index()
     {
-        return view('userpage');
+        $user_id=session('user_id');
+        return view('userpage',['user_id'=>$user_id]);
     }
     //编辑个人资料
     public function edituser()

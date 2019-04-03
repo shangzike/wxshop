@@ -11,6 +11,8 @@ class payController extends Controller
 {
     public function pay(Request $request)
     {
+        $cart_id=$request->cart_id;
+
         /* *
          * 功能：支付宝手机网站支付接口(alipay.trade.wap.pay)接口调试入口页面
          * 版本：2.0

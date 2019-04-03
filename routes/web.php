@@ -74,10 +74,10 @@ Route::any('safeset', 'User\safesetController@safeset')->middleware('login');
 Route::any('loginpwd', 'User\safesetController@loginpwd')->middleware('login');//修改密码
 Route::any('pwd', 'User\safesetController@pwd')->middleware('login');
 
-
 Route::prefix('pay')->group(function (){
    Route::any('pay','Pay\payController@pay')->middleware('login');
    route::any('return','Pay\payController@return')->middleware('login');
    route::any('notify','Pay\payController@notify')->middleware('login');
 });
 
+Route::get('weixin','Weixin\WeixinController@index');

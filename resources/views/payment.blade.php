@@ -13,16 +13,13 @@
         <div class="g-pay-lst">
             <ul>
                 @foreach($goodsInfo as $v)
-                <li>
+                <li class="cart" cart_id="{{$v->cart_id}}">
                     <a href="">
                         <span>
                             <img src="{{url($v->goods_img)}}" border="0" alt="">
                         </span>
                         <dl>
-                            <dt>
-
-                                {{$v->goods_name}}
-                            </dt>
+                            <dt>{{$v->goods_name}}</dt>
                             <dd><em class="price">{{$v->buy_number}}</em>件
                                 <em>￥{{$v->self_price*$v->buy_number}}</em></dd>
                         </dl>
@@ -37,13 +34,6 @@
         </div>
 
         <div class="other_pay marginB">
-            
-            <a href="javascript:;" class="method chaomoney">
-            	<i></i>潮购值抵扣：<span class="gray9">(可用潮购值<em>100</em>)</span><em class="orange fr"></em>
-            </a>
-            <a href="javascript:;" class="method leftmoney">
-            	<i></i>账户总额：<span class="gray9">(￥<em>0.00</em>)</span><em class="orange fr"></em>
-            </a>
             <a href="javascript:;" class="wzf checked">
             	<b class="z-set"></b>第三方支付<em class=" fr"><span class="colorbbb">需要支付&nbsp;</span><b>￥</b>{{$buy_number}}</em>
             </a>
@@ -209,11 +199,29 @@
 
 
     $('#btnPay').click(function(){
-        layer.open({
-            type: 1,
-            title: false,
-            content: $('.paywrapp')
-        })
+        var fangshi=$('.checked').children('span').attr('class');
+        if(fangshi=='zfb'){
+            var cart_id='1';
+            $('.cart').each(function () {
+                cart_id+=$(this).attr('cart_id')+'.';
+            })
+            if(cart_id==''){
+                alert('请至少选择一个商品');
+                location.href="shopcart"
+            }
+            cart_id=cart_id.substr(0,cart_id.length-1);
+            $.ajax({
+                type:'POST',
+                url:"{{url('pay/pay')}}",
+                data:{cart_id:cart_id,_token:"{{csrf_token()}}"},
+                async:false,
+            }).done(function (res) {
+                console.log(res)
+                $('body').html(res)
+            })
+        }else{
+            alert('该支付通道还在打造中');
+        }
     })
         
 </script>
